@@ -23,7 +23,7 @@ class Student {
 void main() {
   List<Student> students = [];
 
-  print("🎓 Welcome to Student Record Management System\n");
+  print(" Welcome to Student Record Management System\n");
 
   while (true) {
     print("""
@@ -34,7 +34,7 @@ Choose an option:
 4️⃣  Exit
 """);
 
-    stdout.write("👉 Enter your choice: ");
+    stdout.write(" Enter your choice: ");
     String? choice = stdin.readLineSync();
 
     switch (choice) {
@@ -48,10 +48,10 @@ Choose an option:
         displaySummary(students);
         break;
       case '4':
-        print("👋 Exiting the program. Goodbye!");
+        print(" Exiting the program. Goodbye!");
         return;
       default:
-        print("❌ Invalid choice! Please try again.\n");
+        print("Invalid choice! Please try again.\n");
     }
   }
 }
@@ -68,12 +68,12 @@ void addStudent(List<Student> students) {
   while (true) {
     id = _promptForInput("Enter Student ID: ");
     if (id.isEmpty) {
-      print("❌ Student ID cannot be empty.\n");
+      print(" Student ID cannot be empty.\n");
       continue;
     }
     bool exists = students.any((student) => student.id == id);
     if (exists) {
-      print("⚠️ ID '$id' already exists! Please enter a unique ID.\n");
+      print(" ID '$id' already exists! Please enter a unique ID.\n");
       continue;
     }
     break; // Valid and unique ID
@@ -83,7 +83,7 @@ void addStudent(List<Student> students) {
   while (true) {
     name = _promptForInput("Enter Student Name: ");
     if (name.isEmpty) {
-      print("❌ Student Name cannot be empty.\n");
+      print(" Student Name cannot be empty.\n");
       continue;
     }
     break; // Valid name
@@ -95,9 +95,9 @@ void addStudent(List<Student> students) {
     double? parsedScore = double.tryParse(scoreInput);
 
     if (parsedScore == null) {
-      print("❌ Invalid input! Please enter a numeric score.\n");
+      print(" Invalid input! Please enter a numeric score.\n");
     } else if (parsedScore < 0 || parsedScore > 100) {
-      print("❌ Invalid score! Must be between 0 and 100.\n");
+      print(" Invalid score! Must be between 0 and 100.\n");
     } else {
       score = parsedScore;
       break; // Valid score
@@ -113,7 +113,7 @@ void addStudent(List<Student> students) {
     grade: grade,
   ));
 
-  print("✅ Student added successfully!\n");
+  print(" Student added successfully!\n");
 }
 
 /// Calculates grade based on score
@@ -129,7 +129,7 @@ String calculateGrade(double score) {
 /// Displays all students sorted by score (descending)
 void displaySortedStudents(List<Student> students) {
   if (students.isEmpty) {
-    print("📭 No students available.\n");
+    print(" No students available.\n");
     return;
   }
 
@@ -140,24 +140,21 @@ void displaySortedStudents(List<Student> students) {
   // Sort by score descending
   sortedStudents.sort((a, b) => b.score.compareTo(a.score));
 
-  print("\n🏆 Student List (Sorted by Score):");
-  print("------------------------------------------------------");
+  print("Student List (Sorted by Score):");
+
   // Using fixed-width columns for better formatting.
   // Adjust padding as needed based on expected max length of ID/Name.
   print("ID          Name                Score   Grade");
-  print("------------------------------------------------------");
-
   for (var student in sortedStudents) {
     print(
         "${student.id.padRight(10)} ${student.name.padRight(18)} ${student.score.toStringAsFixed(1).padRight(6)} ${student.grade}");
   }
-  print("------------------------------------------------------\n");
 }
 
 /// Displays summary: total, highest, lowest scores
 void displaySummary(List<Student> students) {
   if (students.isEmpty) {
-    print("📭 No students to summarize.\n");
+    print(" No students to summarize.\n");
     return;
   }
 
@@ -166,10 +163,8 @@ void displaySummary(List<Student> students) {
   double highest = students.map((s) => s.score).reduce((a, b) => a > b ? a : b);
   double lowest = students.map((s) => s.score).reduce((a, b) => a < b ? a : b);
 
-  print("\n📊 Summary Report:");
-  print("------------------------------------------------------");
+  print(" Summary Report:");
   print("Total Students: ${students.length}");
   print("Highest Score: ${highest.toStringAsFixed(1)}");
   print("Lowest Score: ${lowest.toStringAsFixed(1)}");
-  print("------------------------------------------------------\n");
 }
